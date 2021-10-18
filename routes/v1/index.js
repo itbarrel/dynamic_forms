@@ -2,14 +2,18 @@ const express = require('express');
 
 const router = express.Router();
 
-// const userRoute = require('./user.route');
+const accountRoute = require('./accounts');
+const formTypeRoute = require('./form_types');
+const formRoute = require('./forms');
 
 const routes = [
-  // { path: '/users', route: userRoute }
+  { path: '/accounts', routes: [accountRoute] },
+  { path: '/form_types', routes: [formTypeRoute] },
+  { path: '/forms', routes: [formRoute] },
 ];
 
 routes.forEach((route) => {
-  router.use(route.path, route.route);
+  router.use(route.path, ...route.routes);
 });
 
 module.exports = router;

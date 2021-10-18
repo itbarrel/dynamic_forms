@@ -23,6 +23,14 @@ module.exports = {
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       },
+      status: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
+      active: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

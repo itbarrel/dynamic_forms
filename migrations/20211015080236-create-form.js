@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('accounts', {
+    await queryInterface.createTable('forms', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -9,12 +9,35 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        unique: true,
       },
-      description: Sequelize.TEXT,
-      api_key: {
+      description: {
+        type: Sequelize.TEXT,
+      },
+      identifier: {
         type: Sequelize.STRING,
-        allowNull: false,
+      },
+      fields: {
+        type: Sequelize.JSON,
+      },
+      accountId: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: 'accounts',
+          key: 'id',
+        },
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      },
+      formTypeId: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: 'form_types',
+          key: 'id',
+        },
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       },
       status: {
         type: Sequelize.BOOLEAN,
@@ -29,7 +52,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
       updatedAt: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.DATE,
       },
       deletedAt: {
@@ -39,6 +62,6 @@ module.exports = {
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable('accounts');
+    await queryInterface.dropTable('forms');
   },
 };
