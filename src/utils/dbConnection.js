@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 
-const config = require('../config');
-const logger = require('../config/logger');
+const config = require('../../config');
+const logger = require('../../config/logger');
 
 const sequelize = new Sequelize(config.postgres.url, {
   dialect: 'postgres',
