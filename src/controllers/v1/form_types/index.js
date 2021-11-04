@@ -4,9 +4,9 @@ const all = async (req, res, next) => {
   try {
     const { offset, limit, ...query } = req.query;
 
-    const { docs, pages, total } = await FormTypeService.all(query, offset, limit);
+    const formType = await FormTypeService.all(query, offset, limit);
 
-    res.send({ data: docs, pages, total });
+    res.send(formType);
   } catch (error) {
     next(error);
   }
