@@ -61,8 +61,6 @@ class ResourceService {
     const result = await this.model.destroy({ where: query });
     if (!result) {
       throw new Error(`${this.model.name} not found.`);
-    } else {
-      return ('Deleted Successfully');
     }
   }
 }
