@@ -3,7 +3,7 @@ class ResourceService {
     this.model = model;
   }
 
-  async all(query = {}, offset = 0, limit = 20) {
+  async all(query = {}, offset = 1, limit = 20) {
     const options = {
       where: query,
       page: offset,

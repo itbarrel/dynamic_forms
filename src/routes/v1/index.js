@@ -5,7 +5,7 @@ const router = express.Router();
 const accountRoute = require('./accounts');
 const formTypeRoute = require('./form_types');
 const formRoute = require('./forms');
-const verifyAccount = require('../../middlewares/verifyAccount')
+const verifyAccount = require('../../middlewares/verifyAccount');
 
 const routes = [
   { path: '/accounts', routes: [accountRoute] },
