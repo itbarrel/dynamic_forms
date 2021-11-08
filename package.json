@@ -5,7 +5,8 @@
   "private": true,
   "author": "Saad Mahmood",
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
+    "start:dev": "nodemon ./bin/www",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "sequelize": "./node_modules/.bin/sequelize"
