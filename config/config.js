@@ -13,5 +13,8 @@ module.exports = {
     url: config.postgres.url,
     dialect: 'postgres',
   },
-  production: config.postgres.url,
+  production: {
+    url: config.postgres.url,
+    dialect: 'postgres',
+  },
 };
