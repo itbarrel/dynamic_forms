@@ -4,7 +4,9 @@ const formTypeObj = {
   body: Joi.object().keys({
     name: Joi.string().required(),
     multiple: Joi.boolean().required(),
-    // accountId: Joi.uuid().required(),
+    description: Joi.string(),
+    active: Joi.boolean(),
+    status: Joi.boolean(),
   }),
 };
 

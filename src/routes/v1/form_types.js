@@ -4,16 +4,17 @@ const router = express.Router();
 const formTypesController = require('../../controllers/v1/form_types');
 const validate = require('../../middlewares/validate');
 
-const { generalValidations } = require('../../validations');
+const { generalValidations, formTypeValidations } = require('../../validations');
 
 router.get('/', validate(generalValidations.allResources), formTypesController.all);
 
-router.post('/', formTypesController.create);
+router.post('/', validate(formTypeValidations.formTypeObj), formTypesController.create);
 
 router.get('/:id', validate(generalValidations.getResource), formTypesController.show);
 
 router.put('/:id',
-  validate(generalValidations.getResource), formTypesController.update);
+  validate(generalValidations.getResource),
+  validate(formTypeValidations.formTypeObj), formTypesController.update);
 
 router.delete('/:id', validate(generalValidations.getResource), formTypesController.destroy);
 
