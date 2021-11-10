@@ -45,7 +45,7 @@ const destroy = async (req, res, next) => {
   try {
     const { id } = req.params;
     const FormType = await FormTypeService.delete({ id });
-    res.send(FormType);
+    res.send({ FormType });
   } catch (error) {
     next(error);
   }

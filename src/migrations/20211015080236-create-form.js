@@ -33,7 +33,17 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: true,
         references: {
-          model: 'form_types',
+          model: 'formTypes',
+          key: 'id',
+        },
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      },
+      tenantId: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: 'tenants',
           key: 'id',
         },
         onDelete: 'SET NULL',

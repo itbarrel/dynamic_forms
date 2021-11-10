@@ -1,7 +1,7 @@
 const models = require('../models');
-const ResourceService = require('./resource');
+const AccountResourceService = require('./account_resource');
 
-class AccountService extends ResourceService {
+class AccountService extends AccountResourceService {
   constructor() {
     super(models.Account);
   }

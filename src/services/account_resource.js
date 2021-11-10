@@ -7,8 +7,8 @@ class AccountResourceService {
 
   async all(query = {}, offset = 1, limit = 20) {
 
-    const account = storage.get('account');
-    query.accountId = account.id;
+    const tenant = storage.get('tenant')
+    query.tenantId = tenant.id
 
     const options = {
       where: query,
@@ -21,8 +21,8 @@ class AccountResourceService {
 
   async create(obj = {}) {
 
-    const account = storage.get('account');
-    obj.accountId = account.id;
+    const tenant = storage.get('tenant')
+    obj.tenantId = tenant.id
 
     return this.model.create(obj);
   }
@@ -42,8 +42,8 @@ class AccountResourceService {
     if (!(attributes instanceof Array)) {
       attributes = Object.keys(this.model.tableAttributes);
     }
-    const account = storage.get('account');
-    query.accountId = account.id;
+    const tenant = storage.get('tenant')
+    query.tenantId = tenant.id
 
     const fullQuery = {
       where: query, attributes, include, offset, limit,
@@ -56,8 +56,8 @@ class AccountResourceService {
 
   async update(obj = {}, query = {}) {
 
-    const account = storage.get('account');
-    query.accountId = account.id;
+    const tenant = storage.get('tenant')
+    query.tenantId = tenant.id
 
     const updated = await this.model.update(obj, {
       where: query,
@@ -75,8 +75,8 @@ class AccountResourceService {
 
   async delete(query = {}) {
 
-    const account = storage.get('account');
-    query.accountId = account.id;
+    const tenant = storage.get('tenant')
+    query.tenantId = tenant.id
 
     const result = await this.model.destroy({ where: query });
     if (!result) {

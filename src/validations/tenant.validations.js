@@ -1,15 +1,14 @@
 const Joi = require('joi');
 
-const formObj = {
+const tenantObj = {
     body: Joi.object().keys({
-        name: Joi.string(),
+        name: Joi.string().required(),
         description: Joi.string(),
-        formTypeId: Joi.string(),
         active: Joi.boolean(),
         status: Joi.boolean(),
     }),
 };
 
 module.exports = {
-    formObj,
+    tenantObj,
 };

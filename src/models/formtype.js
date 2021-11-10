@@ -6,6 +6,7 @@ const sequelizePaginate = require('sequelize-paginate');
 module.exports = (sequelize, DataTypes) => {
   class FormType extends Model {
     static associate(models) {
+      FormType.belongsTo(models.Tenant, { foreignKey: 'tenantId' });
       FormType.belongsTo(models.Account, { foreignKey: 'accountId' });
       FormType.hasMany(models.Form, { foreignKey: 'formTypeId' });
     }
@@ -46,8 +47,19 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'FormType',
-    tableName: 'form_types',
+    tableName: 'formTypes',
     paranoid: true,
+    hooks: {
+      beforeUpdate: async (formType) => {
+        const toChange = await formType.previous()
+        if (toChange.multiple === true) {
+          const forms = await formType.countForms();
+          if (forms > 1) {
+            throw new Error('Cannot Change the multiple of FormType');
+          }
+        }
+      },
+    },
   });
   sequelizePaginate.paginate(FormType);
   return FormType;

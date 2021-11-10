@@ -3,6 +3,7 @@ const Joi = require('joi');
 const headers = {
   headers: Joi.object().keys({
     token: Joi.string().required(),
+    tenantToken: Joi.string().required(),
   }).options({ allowUnknown: true }),
 };
 

@@ -1,20 +1,22 @@
+'use strict';
 const {
-  Model,
+  Model
 } = require('sequelize');
-
 const sequelizePaginate = require('sequelize-paginate');
 const IDGenerator = require('../utils/IdGenerator');
 
 module.exports = (sequelize, DataTypes) => {
-  class Account extends Model {
-    static associate(models) {
-      Account.belongsTo(models.Tenant, { foreignKey: 'tenantId' });
-      Account.hasMany(models.FormType, { foreignKey: 'accountId' });
-      Account.hasMany(models.Form, { foreignKey: 'accountId' });
-    }
-  }
+  class Tenant extends Model {
 
-  Account.init({
+    static associate(models) {
+      Tenant.hasMany(models.Account, { foreignKey: 'tenantId' });
+      Tenant.hasMany(models.FormType, { foreignKey: 'tenantId' });
+      Tenant.hasMany(models.Form, { foreignKey: 'tenantId' });
+
+
+    }
+  };
+  Tenant.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -51,8 +53,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'Account',
-    tableName: 'accounts',
+    modelName: 'Tenant',
+    tableName: 'tenants',
     paranoid: true,
     // class methods
     classMethods: {
@@ -60,12 +62,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     hooks: {
       // eslint-disable-next-line no-unused-vars
-      beforeValidate(account) {
-        account.apikey = IDGenerator(32);
-        return account;
+      beforeValidate(tenant) {
+        tenant.apikey = IDGenerator(32);
+        return tenant;
       },
     },
   });
-  sequelizePaginate.paginate(Account);
-  return Account;
+  sequelizePaginate.paginate(Tenant);
+  return Tenant;
 };

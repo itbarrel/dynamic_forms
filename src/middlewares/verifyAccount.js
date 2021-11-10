@@ -5,13 +5,13 @@ const verifyAccount = async (req, res, next) => {
   storage.run(async () => {
     try {
       const account = await AccountService.findByQuery({
-        api_key: req.headers.token,
+        apikey: req.headers.authorization,
       }, true);
       if (account) {
         storage.set('account', account);
         next();
       } else {
-        next(new Error('Not Found'));
+        next(new Error(' Account Not Found'));
       }
     } catch (error) {
       next(error);

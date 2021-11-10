@@ -1,6 +1,7 @@
+'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('accounts', {
+    await queryInterface.createTable('tenants', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -15,16 +16,6 @@ module.exports = {
       apikey: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-      tenantId: {
-        type: Sequelize.UUID,
-        allowNull: true,
-        references: {
-          model: 'tenants',
-          key: 'id',
-        },
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
       },
       status: {
         type: Sequelize.BOOLEAN,
@@ -48,7 +39,7 @@ module.exports = {
       },
     });
   },
-  down: async (queryInterface) => {
-    await queryInterface.dropTable('accounts');
-  },
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('tenants');
+  }
 };

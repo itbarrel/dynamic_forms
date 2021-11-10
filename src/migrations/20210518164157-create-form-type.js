@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('form_types', {
+    await queryInterface.createTable('formTypes', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -18,6 +18,16 @@ module.exports = {
         allowNull: true,
         references: {
           model: 'accounts',
+          key: 'id',
+        },
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      },
+      tenantId: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: 'tenants',
           key: 'id',
         },
         onDelete: 'SET NULL',
@@ -46,13 +56,13 @@ module.exports = {
     });
     // await queryInterface.addIndex('form_types', ['name', 'accountId'])
 
-    await queryInterface.addConstraint('form_types', {
-      fields: ['name', 'accountId'],
+    await queryInterface.addConstraint('formTypes', {
+      fields: ['name', 'accountId', 'tenantId'],
       type: 'unique',
       name: 'unique_name_per_account',
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable('form_types');
+    await queryInterface.dropTable('formTypes');
   },
 };
