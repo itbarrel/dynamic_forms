@@ -8,13 +8,12 @@ const { generalValidations, formValidations } = require('../../validations');
 
 router.get('/', validate(generalValidations.allResources), formController.all);
 
-router.post('/', validate(formValidations.formObj), formController.create);
+router.post('/', formController.create);
 
 router.get('/:id', validate(generalValidations.getResource), formController.show);
 
 router.put('/:id',
-  validate(generalValidations.getResource),
-  validate(formValidations.formObj), formController.update);
+  validate(generalValidations.getResource), formController.update);
 
 router.delete('/:id', validate(generalValidations.getResource), formController.destroy);
 

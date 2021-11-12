@@ -4,7 +4,6 @@ const storage = require('../utils/cl-storage');
 const verifyTenant = async (req, res, next) => {
     storage.run(async () => {
         try {
-            console.log(req.headers);
             const Tenant = await TenantService.findByQuery({
                 apikey: req.headers.token,
             }, true);
