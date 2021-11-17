@@ -1,21 +1,17 @@
-'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
 const sequelizePaginate = require('sequelize-paginate');
 const IDGenerator = require('../utils/IdGenerator');
 
 module.exports = (sequelize, DataTypes) => {
   class Tenant extends Model {
-
     static associate(models) {
       Tenant.hasMany(models.Account, { foreignKey: 'tenantId' });
       Tenant.hasMany(models.FormType, { foreignKey: 'tenantId' });
       Tenant.hasMany(models.Form, { foreignKey: 'tenantId' });
-
-
     }
-  };
+  }
   Tenant.init({
     id: {
       type: DataTypes.UUID,

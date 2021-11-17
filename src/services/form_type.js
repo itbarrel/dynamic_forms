@@ -1,5 +1,5 @@
-const models = require('../models')
-const FormResourceService = require('./form_resource')
+const models = require('../models');
+const FormResourceService = require('./form_resource');
 
 class FormTypeService extends FormResourceService {
   constructor() {

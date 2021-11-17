@@ -1,10 +1,10 @@
 const models = require('../models');
-const ResourceService = require('.//resource');
+const ResourceService = require('./resource');
 
 class TenantService extends ResourceService {
-    constructor() {
-        super(models.Tenant);
-    }
+  constructor() {
+    super(models.Tenant);
+  }
 }
 
 module.exports = new TenantService();

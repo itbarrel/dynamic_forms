@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     paranoid: true,
     hooks: {
       beforeUpdate: async (formType) => {
-        const toChange = await formType.previous()
+        const toChange = await formType.previous();
         if (toChange.multiple === true) {
           const forms = await formType.countForms();
           if (forms > 1) {
