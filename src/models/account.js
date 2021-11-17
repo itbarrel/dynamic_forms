@@ -61,7 +61,13 @@ module.exports = (sequelize, DataTypes) => {
     hooks: {
       // eslint-disable-next-line no-unused-vars
       beforeValidate(account) {
+        // eslint-disable-next-line no-param-reassign
         account.apikey = IDGenerator(32);
+        return account;
+      },
+      afterCreate: async (account) => {
+        await account.createFormType({ name: 'Multiple', multiple: true, tenantId: account.tenantId });
+        await account.createFormType({ name: 'Not-Multiple', multiple: false, tenantId: account.tenantId });
         return account;
       },
     },
