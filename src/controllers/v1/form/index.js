@@ -44,7 +44,7 @@ const update = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const Form = await FormService.delete({ id });
+    await FormService.delete({ id });
     res.send({ message: 'Form is deleted' });
   } catch (error) {
     next(error);

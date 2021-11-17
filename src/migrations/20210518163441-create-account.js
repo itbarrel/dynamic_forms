@@ -26,6 +26,10 @@ module.exports = {
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       },
+      public: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       status: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,

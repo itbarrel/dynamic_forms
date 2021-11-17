@@ -6,9 +6,8 @@ class AccountResourceService {
   }
 
   async all(query = {}, offset = 1, limit = 20) {
-
-    const tenant = storage.get('tenant')
-    query.tenantId = tenant.id
+    const tenant = storage.get('tenant');
+    query.tenantId = tenant.id;
 
     const options = {
       where: query,
@@ -20,9 +19,8 @@ class AccountResourceService {
   }
 
   async create(obj = {}) {
-
-    const tenant = storage.get('tenant')
-    obj.tenantId = tenant.id
+    const tenant = storage.get('tenant');
+    obj.tenantId = tenant.id;
 
     return this.model.create(obj);
   }
@@ -42,8 +40,8 @@ class AccountResourceService {
     if (!(attributes instanceof Array)) {
       attributes = Object.keys(this.model.tableAttributes);
     }
-    const tenant = storage.get('tenant')
-    query.tenantId = tenant.id
+    const tenant = storage.get('tenant');
+    query.tenantId = tenant.id;
 
     const fullQuery = {
       where: query, attributes, include, offset, limit,
@@ -51,13 +49,12 @@ class AccountResourceService {
 
     return single
       ? this.model.findOne(fullQuery)
-      : this.model.find(fullQuery);
+      : this.model.findAll(fullQuery);
   }
 
   async update(obj = {}, query = {}) {
-
-    const tenant = storage.get('tenant')
-    query.tenantId = tenant.id
+    const tenant = storage.get('tenant');
+    query.tenantId = tenant.id;
 
     const updated = await this.model.update(obj, {
       where: query,
@@ -74,9 +71,8 @@ class AccountResourceService {
   }
 
   async delete(query = {}) {
-
-    const tenant = storage.get('tenant')
-    query.tenantId = tenant.id
+    const tenant = storage.get('tenant');
+    query.tenantId = tenant.id;
 
     const result = await this.model.destroy({ where: query });
     if (!result) {

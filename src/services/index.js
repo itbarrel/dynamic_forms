@@ -5,12 +5,11 @@ const FormTypeService = require('./form_type');
 const FormService = require('./form');
 const TenantService = require('./tenant');
 
-
 module.exports = {
   ResourceService,
   AccountService,
   FormTypeService,
   FormService,
   TenantService,
-  AccountResourceService
+  AccountResourceService,
 };

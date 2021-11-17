@@ -4,7 +4,7 @@ const router = express.Router();
 const formController = require('../../controllers/v1/form');
 const validate = require('../../middlewares/validate');
 
-const { generalValidations, formValidations } = require('../../validations');
+const { generalValidations } = require('../../validations');
 
 router.get('/', validate(generalValidations.allResources), formController.all);
 
