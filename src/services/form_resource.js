@@ -8,11 +8,13 @@ class AccountResourceService {
   async all(query = {}, offset = 1, limit = 20) {
     const account = storage.get('account');
     const tenant = storage.get('tenant');
-    query.tenantId = tenant.id;
-    query.accountId = account.id;
+
+    const toQuery = query;
+    toQuery.tenantId = tenant.id;
+    toQuery.accountId = account.id;
 
     const options = {
-      where: query,
+      where: toQuery,
       page: offset,
       paginate: limit,
 
@@ -23,10 +25,12 @@ class AccountResourceService {
   async create(obj = {}) {
     const account = storage.get('account');
     const tenant = storage.get('tenant');
-    obj.tenantId = tenant.id;
-    obj.accountId = account.id;
 
-    return this.model.create(obj);
+    const toCreate = obj;
+    toCreate.tenantId = tenant.id;
+    toCreate.accountId = account.id;
+
+    return this.model.create(toCreate);
   }
 
   async findById(id) {
@@ -41,16 +45,21 @@ class AccountResourceService {
     offset = 0,
     limit = 20,
   ) {
-    if (!(attributes instanceof Array)) {
-      attributes = Object.keys(this.model.tableAttributes);
-    }
     const account = storage.get('account');
     const tenant = storage.get('tenant');
-    query.tenantId = tenant.id;
-    query.accountId = account.id;
+
+    const toQuery = query;
+    let toAttributes = attributes;
+
+    if (!(attributes instanceof Array)) {
+      toAttributes = Object.keys(this.model.tableAttributes);
+    }
+
+    toQuery.tenantId = tenant.id;
+    toQuery.accountId = account.id;
 
     const fullQuery = {
-      where: query, attributes, include, offset, limit,
+      where: toQuery, attributes: toAttributes, include, offset, limit,
     };
 
     return single
@@ -61,11 +70,13 @@ class AccountResourceService {
   async update(obj = {}, query = {}) {
     const account = storage.get('account');
     const tenant = storage.get('tenant');
-    query.tenantId = tenant.id;
-    query.accountId = account.id;
+
+    const toQuery = query;
+    toQuery.tenantId = tenant.id;
+    toQuery.accountId = account.id;
 
     const updated = await this.model.update(obj, {
-      where: query,
+      where: toQuery,
       validate: true,
       sideEffects: true,
       paranoid: true,
@@ -79,12 +90,13 @@ class AccountResourceService {
   }
 
   async delete(query = {}) {
+    const toQuery = query;
     const account = storage.get('account');
     const tenant = storage.get('tenant');
-    query.tenantId = tenant.id;
-    query.accountId = account.id;
+    toQuery.tenantId = tenant.id;
+    toQuery.accountId = account.id;
 
-    const result = await this.model.destroy({ where: query });
+    const result = await this.model.destroy({ where: toQuery });
     if (!result) {
       throw new Error(`${this.model.name} not found.`);
     } else {
