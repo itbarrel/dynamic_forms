@@ -63,6 +63,7 @@ module.exports = (sequelize, DataTypes) => {
     paranoid: true,
     hooks: {
       beforeCreate: async (form) => {
+        // eslint-disable-next-line no-param-reassign
         form.identifier = removeChars(downcase(form.name));
         if (form.formTypeId) {
           const FormType = await sequelize.models.FormType.findOne({

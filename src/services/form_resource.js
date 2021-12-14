@@ -34,7 +34,7 @@ class AccountResourceService {
   }
 
   async findById(id) {
-    return this.model.byId(id);
+    return this.model.findByPk(id);
   }
 
   async findByQuery(

@@ -24,8 +24,9 @@ const create = async (req, res, next) => {
 const show = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const Form = await FormService.findById(id);
-    res.send({ Form });
+    const form = await FormService.findById(id);
+
+    res.send(form.dataValues);
   } catch (error) {
     next(error);
   }
